@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int skriv_fizzbuzz(int fran, int till)
 {
@@ -29,24 +30,26 @@ int skriv_fizzbuzz(int fran, int till)
 void fizzbuzz_sammanfattning(int fran, int till, char *sammanfattning)
 {
 
-    int fizz_buzz = 0;
-    int fizz = 0;
-    int buzz = 0;
+    int antal_fizzbuzz = 0;
+    int antal_fizz = 0;
+    int antal_buzz = 0;
 
     for (int i = fran; i <= till; i++)
     {
 
         if (i % 3 == 0 && i % 5 == 0)
         {
-            fizz_buzz++;
+            antal_fizzbuzz++;
         }
         else if (i % 3 == 0)
         {
-            fizz++;
+            antal_fizz++;
         }
         else if (i % 5 == 0)
         {
-            buzz++;
+            antal_buzz++;
         }
     }
+
+    sprintf(sammanfattning, "Fizz: %d, Buzz: %d, FizzBuzz: %d", antal_fizz, antal_buzz, antal_fizzbuzz);
 }
