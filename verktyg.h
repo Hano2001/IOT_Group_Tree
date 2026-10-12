@@ -7,4 +7,5 @@ int ar_primtal(int tal);
 void skriv_fizzbuzz(int fran, int till);
 double berakna(double a, double b, char operatortecken);
 
+void fizzbuzz_sammanfattning(int fran, int till, char *sammanfattning);
 #endif
