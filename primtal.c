@@ -18,3 +18,12 @@ int ar_primtal(int tal)
     }
     return 1;
 }
+int raknar_primtal_i_array(int tal[], int antal) {
+    int antal_primtal = 0;
+    for (int i = 0; i < antal; i++) {
+        if (ar_primtal(tal[i])) {
+            antal_primtal++;
+        }
+    }
+    return antal_primtal;
+}
