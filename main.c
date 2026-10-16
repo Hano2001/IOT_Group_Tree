@@ -10,6 +10,12 @@ static void skriv_meny(void)
     printf("4. Kontrollera om ett tal ar ett primtal\n");
     printf("5. FizzBuzz for ett intervall\n");
     printf("6. Enkel rakning(+, -, *, /)\n");
+    printf("7. Konvertera flera temperaturer (Celsius -> Fahrenheit)\n");
+    printf("8. Storst rektangel i en lista\n");
+    printf("9. Flera multiplikationstabeller\n");
+    printf("10. Rakna primtal i en lista\n");
+    printf("11. FizzBuzz-sammanfattning\n");
+    printf("12. Byt plats pa tva tal\n");
     printf("0. Avsluta\n");
     printf("Val : ");
 }
