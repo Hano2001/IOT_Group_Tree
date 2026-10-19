@@ -22,3 +22,10 @@ double berakna(double a, double b, char operatortecken)
         return NAN;
     }
 }
+
+void byt_plats(double *a, double *b)
+{
+    double temp = *a;
+    *a = *b;
+    *b = temp;
+}
