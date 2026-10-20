@@ -16,6 +16,7 @@ static void skriv_meny(void)
     printf("10. Rakna primtal i en lista\n");
     printf("11. FizzBuzz-sammanfattning\n");
     printf("12. Byt plats pa tva tal\n");
+    printf("15. Skriv ut matloggen\n");
     printf("0. Avsluta\n");
     printf("Val : ");
 }
@@ -188,6 +189,9 @@ int main(void)
             printf("Efter: a = %.2f, b = %.2f\n", a, b);
             break;
         }
+        case 15:
+            skriv_matlogg(matlogg, matlogg_antal);
+            break;
         case 0:
             if (matlogg != NULL)
             {
@@ -197,6 +201,7 @@ int main(void)
             }
             printf("Avslutar.\n");
             break;
+
         default:
             printf("Ogiltigt val, forsok igen.\n");
         }
