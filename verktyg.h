@@ -25,4 +25,6 @@ int raknar_primtal_i_array(int tal[], int antal);
 void fizzbuzz_sammanfattning(int fran, int till, char *sammanfattning);
 
 void byt_plats(double *a, double *b);
+
+void skriv_matlogg(double *logg, int antal);
 #endif
