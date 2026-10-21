@@ -174,6 +174,11 @@ int main(void) {
                 printf("Matloggen innehaller nu %d matning(ar).\n", matlogg_antal);
                 break;
             }
+            case 14:
+                matlogg = ta_bort_senaste_matning(matlogg, &matlogg_antal);
+                printf("Matloggen innehaller nu %d matning(ar).\n", matlogg_antal);
+                    break;
+
             case 15:
                 skriv_matlogg(matlogg, matlogg_antal);
                 break;

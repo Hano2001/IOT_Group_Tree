@@ -30,4 +30,5 @@ void skriv_matlogg(double *logg, int antal);
 
 double *lagg_till_matning(double *logg, int *antal, double varde);
 
+double *ta_bort_senaste_matning(double *logg, int *antal);
 #endif
