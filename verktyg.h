@@ -27,4 +27,7 @@ void fizzbuzz_sammanfattning(int fran, int till, char *sammanfattning);
 void byt_plats(double *a, double *b);
 
 void skriv_matlogg(double *logg, int antal);
+
+double *lagg_till_matning(double *logg, int *antal, double varde);
+
 #endif
