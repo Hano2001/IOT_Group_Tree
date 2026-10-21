@@ -1,6 +1,12 @@
 #ifndef VERKTYG_H
 #define VERKTYG_H
 
+typedef struct {
+    char namn[50];
+    double varde;
+} Sensormatning;
+
+
 double celsius_till_fahrenheit(double celsius);
 
 double rektangelarea(double bredd, double hojd);
@@ -30,4 +36,5 @@ void skriv_matlogg(double *logg, int antal);
 
 double *lagg_till_matning(double *logg, int *antal, double varde);
 
+double *ta_bort_senaste_matning(double *logg, int *antal);
 #endif
