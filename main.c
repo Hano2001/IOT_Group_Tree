@@ -17,6 +17,12 @@ static void skriv_meny(void) {
     printf("12. Byt plats pa tva tal\n");
     printf("13. Lagg till en matning i matloggen\n");
     printf("15. Skriv ut matloggen\n");
+    printf("19. Lagg till en sensormatning\n");
+    printf("20. Skriv ut sensorregistret\n");
+    printf("21. Medelvarde for sensorregistret\n");
+    printf("22. Hitta en sensor via namn\n");
+    printf("23. Spara sensorregistret till fil\n");
+    printf("24. Las in sensorregistret fran fil\n");
     printf("0. Avsluta\n");
     printf("Val : ");
 }
@@ -25,6 +31,10 @@ int main(void) {
     int val;
     double *matlogg = NULL;
     int matlogg_antal = 0;
+    Sensormatning *sensorregister = NULL;
+    int sensorregister_antal = 0;
+
+
 
     do {
         skriv_meny();
@@ -188,6 +198,9 @@ int main(void) {
                     matlogg = NULL;
                     matlogg_antal = 0;
                 }
+                free(sensorregister);
+                sensorregister = NULL;
+                sensorregister_antal = 0;
                 printf("Avslutar.\n");
                 break;
 
