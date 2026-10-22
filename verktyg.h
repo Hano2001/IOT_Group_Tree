@@ -30,4 +30,6 @@ void skriv_matlogg(double *logg, int antal);
 
 double *lagg_till_matning(double *logg, int *antal, double varde);
 
+double *kopiera_matlogg(double *logg, int antal);
+
 #endif
