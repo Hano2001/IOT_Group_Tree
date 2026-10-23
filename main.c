@@ -18,6 +18,7 @@ static void skriv_meny(void) {
     printf("13. Lagg till en matning i matloggen\n");
     printf("15. Skriv ut matloggen\n");
     printf("16. Statistik for matloggen (min/max/medel)\n");
+    printf("17. Kopiera matloggen\n");
     printf("19. Lagg till en sensormatning\n");
     printf("20. Skriv ut sensorregistret\n");
     printf("21. Medelvarde for sensorregistret\n");
@@ -193,10 +194,21 @@ int main(void) {
             case 15:
                 skriv_matlogg(matlogg, matlogg_antal);
                 break;
+            
             case 16: {
                 double min, max, medel;
                 berakna_loggstatistik(matlogg, matlogg_antal, &min, &max, &medel);
                 printf("Min: %.2f, Max: %.2f, Medel: %.2f\n", min, max, medel);
+                break;
+            }
+
+            case 17: {
+                int kopia_antal = matlogg_antal;
+                double *kopia = kopiera_matlogg(matlogg, matlogg_antal);
+                printf("Kopierade %d matning(ar) till en ny logg:\n", kopia_antal);
+                skriv_matlogg(kopia, kopia_antal);
+                frigor_matlogg(kopia);
+                printf("(Kopian ar nu frigjord igen -- den var bara for testet.)\n");
                 break;
             }
 
