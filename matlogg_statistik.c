@@ -3,10 +3,10 @@
 
 void berakna_loggstatistik(double *logg, int antal, double *min_ut, double *max_ut, double *medel_ut)
 {
-    if (logg == NULL || antal <= 0 || min_ut == NULL || max_ut == NULL || medel_ut == NULL) {
-        if (min_ut != NULL) *min_ut = 0.0;
-        if (max_ut != NULL) *max_ut = 0.0;
-        if (medel_ut != NULL) *medel_ut = 0.0;
+    if (logg == NULL) {
+        *min_ut = 0.0;
+        *max_ut = 0.0;
+        *medel_ut = 0.0;
         return;
     }
 
