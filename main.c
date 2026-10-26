@@ -214,12 +214,42 @@ int main(void) {
                 printf("(Kopian ar nu frigjord igen -- den var bara for testet.)\n");
                 break;
             }
+
             case 18:
                 frigor_matlogg(matlogg);
                 matlogg = NULL;
                 matlogg_antal = 0;
                 printf("Matloggen ar frigjord.\n");
                 break;
+
+            case 19: {
+                char namn[50];
+                double varde;
+                printf("Namn pa sensorn (utan mellanslag): ");
+                scanf("%49s", namn);
+                printf("Matvarde: ");
+                scanf("%lf", &varde);
+                sensorregister = lagg_till_sensormatning(sensorregister,
+                                                         &sensorregister_antal,
+                                                         namn, varde);
+                printf("Sensorregistret innehaller nu %d post(er).\n",
+                       sensorregister_antal);
+                break;
+            }
+
+            case 22: {
+                char namn[50];
+                printf("Vilket namn vill du soka efter? ");
+                scanf("%49s", namn);
+                int index = hitta_sensor(sensorregister, sensorregister_antal, namn);
+                if (index == -1) {
+                    printf("Hittade ingen sensor med namnet \"%s\".\n", namn);
+                } else {
+                    printf("Hittade \"%s\" pa plats %d, varde %.2f\n",
+                           namn, index, sensorregister[index].varde);
+                }
+                break;
+            }
             case 0:
                 if (matlogg != NULL) {
                     frigor_matlogg(matlogg);
