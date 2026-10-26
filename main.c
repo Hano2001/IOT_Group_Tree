@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "verktyg.h"
 
 static void skriv_meny(void) {
@@ -16,9 +17,11 @@ static void skriv_meny(void) {
     printf("11. FizzBuzz-sammanfattning\n");
     printf("12. Byt plats pa tva tal\n");
     printf("13. Lagg till en matning i matloggen\n");
+    printf("14. Ta bort senaste matningen\n");
     printf("15. Skriv ut matloggen\n");
     printf("16. Statistik for matloggen (min/max/medel)\n");
     printf("17. Kopiera matloggen\n");
+    printf("18. Frigor matloggen\n");
     printf("19. Lagg till en sensormatning\n");
     printf("20. Skriv ut sensorregistret\n");
     printf("21. Medelvarde for sensorregistret\n");
@@ -211,7 +214,12 @@ int main(void) {
                 printf("(Kopian ar nu frigjord igen -- den var bara for testet.)\n");
                 break;
             }
-
+            case 18:
+                frigor_matlogg(matlogg);
+                matlogg = NULL;
+                matlogg_antal = 0;
+                printf("Matloggen ar frigjord.\n");
+                break;
             case 0:
                 if (matlogg != NULL) {
                     frigor_matlogg(matlogg);
