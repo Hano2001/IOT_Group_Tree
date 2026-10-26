@@ -42,4 +42,6 @@ void berakna_loggstatistik(double *logg, int antal, double *min_ut, double *max_
 
 double *kopiera_matlogg(double *logg, int antal);
 
+void frigor_matlogg(double *logg);
+
 #endif
