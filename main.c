@@ -192,6 +192,16 @@ int main(void) {
             case 15:
                 skriv_matlogg(matlogg, matlogg_antal);
                 break;
+            
+            case 24: {
+                char filnamn[100];
+                printf("Filnamn att lasa fran: ");
+                scanf("%99s", filnamn);
+                free(sensorregister);
+                sensorregister = lasa_sensorregister(filnamn, &sensorregister_antal);
+                printf("Laste in %d post(er) fran %s.\n", sensorregister_antal, filnamn);
+                    break;
+                }
             case 0:
                 if (matlogg != NULL) {
                     frigor_matlogg(matlogg);

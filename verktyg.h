@@ -37,4 +37,6 @@ void skriv_matlogg(double *logg, int antal);
 double *lagg_till_matning(double *logg, int *antal, double varde);
 
 double *ta_bort_senaste_matning(double *logg, int *antal);
+
+Sensormatning *lasa_sensorregister(const char *filnamn, int *antal_ut);
 #endif
