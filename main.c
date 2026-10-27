@@ -269,41 +269,15 @@ int main(void) {
             printf("Sensorregistret sparat till %s.\n", filnamn);
             break;
         }
-        case 0:
-            if (matlogg != NULL)
-            {
-                frigor_matlogg(matlogg);
-                matlogg = NULL;
-                matlogg_antal = 0;
-            }
+        case 24: {
+            char filnamn[100];
+            printf("Filnamn att lasa fran: ");
+            scanf("%99s", filnamn);
             free(sensorregister);
-            sensorregister = NULL;
-            sensorregister_antal = 0;
-            printf("Avslutar.\n");
+            sensorregister = lasa_sensorregister(filnamn, &sensorregister_antal);
+            printf("Laste in %d post(er) fran %s.\n", sensorregister_antal, filnamn);
             break;
-            case 22: {
-                char namn[50];
-                printf("Vilket namn vill du soka efter? ");
-                scanf("%49s", namn);
-                int index = hitta_sensor(sensorregister, sensorregister_antal, namn);
-                if (index == -1) {
-                    printf("Hittade ingen sensor med namnet \"%s\".\n", namn);
-                } else {
-                    printf("Hittade \"%s\" pa plats %d, varde %.2f\n",
-                           namn, index, sensorregister[index].varde);
-                }
-                break;
-            }
-
-            case 24: {
-                char filnamn[100];
-                printf("Filnamn att lasa fran: ");
-                scanf("%99s", filnamn);
-                free(sensorregister);
-                sensorregister = lasa_sensorregister(filnamn, &sensorregister_antal);
-                printf("Laste in %d post(er) fran %s.\n", sensorregister_antal, filnamn);
-                    break;
-                }
+        }
 
             case 0:
                 if (matlogg != NULL) {
