@@ -1,11 +1,11 @@
 #ifndef VERKTYG_H
 #define VERKTYG_H
 
-typedef struct {
+typedef struct
+{
     char namn[50];
     double varde;
 } Sensormatning;
-
 
 double celsius_till_fahrenheit(double celsius);
 
@@ -48,5 +48,7 @@ Sensormatning *lagg_till_sensormatning(Sensormatning *reg, int *antal,
                                        const char *namn, double varde);
 
 int hitta_sensor(Sensormatning *reg, int antal, const char *namn);
+
+void spara_sensorregister(const char *filnamn, Sensormatning *reg, int antal);
 
 #endif
