@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "verktyg.h"
 
 static void skriv_meny(void) {
@@ -16,7 +17,11 @@ static void skriv_meny(void) {
     printf("11. FizzBuzz-sammanfattning\n");
     printf("12. Byt plats pa tva tal\n");
     printf("13. Lagg till en matning i matloggen\n");
+    printf("14. Ta bort senaste matningen\n");
     printf("15. Skriv ut matloggen\n");
+    printf("16. Statistik for matloggen (min/max/medel)\n");
+    printf("17. Kopiera matloggen\n");
+    printf("18. Frigor matloggen\n");
     printf("19. Lagg till en sensormatning\n");
     printf("20. Skriv ut sensorregistret\n");
     printf("21. Medelvarde for sensorregistret\n");
@@ -192,7 +197,65 @@ int main(void) {
             case 15:
                 skriv_matlogg(matlogg, matlogg_antal);
                 break;
-            
+
+            case 16: {
+                double min, max, medel;
+                berakna_loggstatistik(matlogg, matlogg_antal, &min, &max, &medel);
+                printf("Min: %.2f, Max: %.2f, Medel: %.2f\n", min, max, medel);
+                break;
+            }
+
+            case 17: {
+                int kopia_antal = matlogg_antal;
+                double *kopia = kopiera_matlogg(matlogg, matlogg_antal);
+                printf("Kopierade %d matning(ar) till en ny logg:\n", kopia_antal);
+                skriv_matlogg(kopia, kopia_antal);
+                frigor_matlogg(kopia);
+                printf("(Kopian ar nu frigjord igen -- den var bara for testet.)\n");
+                break;
+            }
+
+            case 18:
+                frigor_matlogg(matlogg);
+                matlogg = NULL;
+                matlogg_antal = 0;
+                printf("Matloggen ar frigjord.\n");
+                break;
+
+            case 19: {
+                char namn[50];
+                double varde;
+                printf("Namn pa sensorn (utan mellanslag): ");
+                scanf("%49s", namn);
+                printf("Matvarde: ");
+                scanf("%lf", &varde);
+                sensorregister = lagg_till_sensormatning(sensorregister,
+                                                         &sensorregister_antal,
+                                                         namn, varde);
+                printf("Sensorregistret innehaller nu %d post(er).\n",
+                       sensorregister_antal);
+                break;
+            }
+            case 21:
+            printf("Medelvarde: %.2f\n",
+                medelvarde_sensorregister(sensorregister, sensorregister_antal));
+                break;
+
+
+            case 22: {
+                char namn[50];
+                printf("Vilket namn vill du soka efter? ");
+                scanf("%49s", namn);
+                int index = hitta_sensor(sensorregister, sensorregister_antal, namn);
+                if (index == -1) {
+                    printf("Hittade ingen sensor med namnet \"%s\".\n", namn);
+                } else {
+                    printf("Hittade \"%s\" pa plats %d, varde %.2f\n",
+                           namn, index, sensorregister[index].varde);
+                }
+                break;
+            }
+
             case 24: {
                 char filnamn[100];
                 printf("Filnamn att lasa fran: ");
@@ -202,6 +265,7 @@ int main(void) {
                 printf("Laste in %d post(er) fran %s.\n", sensorregister_antal, filnamn);
                     break;
                 }
+
             case 0:
                 if (matlogg != NULL) {
                     frigor_matlogg(matlogg);
