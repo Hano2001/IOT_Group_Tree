@@ -55,4 +55,5 @@ Sensormatning *lasa_sensorregister(const char *filnamn, int *antal_ut);
 
 void spara_sensorregister(const char *filnamn, Sensormatning *reg, int antal);
 
+void skriv_sensorregister(Sensormatning *reg, int antal);
 #endif

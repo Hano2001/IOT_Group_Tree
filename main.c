@@ -236,6 +236,10 @@ int main(void) {
                        sensorregister_antal);
                 break;
             }
+            case 20:
+                skriv_sensorregister(sensorregister, sensorregister_antal);
+                break;
+
             case 21:
             printf("Medelvarde: %.2f\n",
                 medelvarde_sensorregister(sensorregister, sensorregister_antal));
