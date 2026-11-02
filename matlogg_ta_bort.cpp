@@ -9,7 +9,7 @@ double *ta_bort_senaste_matning(double *logg, int *antal)
         return logg;
     }
 
-    if(logg == NULL || antal <= 0)
+    if(logg == NULL || *antal <= 0)
     {
         printf("matloggen ar tom och oforandrad");
         return logg;
@@ -21,4 +21,6 @@ double *ta_bort_senaste_matning(double *logg, int *antal)
         free(logg);
         return NULL;
     }
+
+    return logg;
 }

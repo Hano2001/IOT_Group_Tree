@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "verktyg.h"
-
+#include <iostream>
+#include <iomanip>
 static void skriv_meny(void) {
     printf("\n == = Gruppens verktygslada == =\n");
     printf("1. Temperaturkonvertering(Celsius->Fahrenheit)\n");
@@ -38,12 +39,13 @@ int main(void) {
     int matlogg_antal = 0;
     Sensormatning *sensorregister = NULL;
     int sensorregister_antal = 0;
-
+    std::cout << std::fixed << std::setprecision(2);
+    setvbuf(stdout, NULL, _IONBF, 0);
 
 
     do {
         skriv_meny();
-        scanf("%d", &val);
+        std::cin >> val;
 
         switch (val) {
             case 1: {
@@ -184,7 +186,7 @@ int main(void) {
             case 13: {
                 double varde;
                 printf("Ange matvarde att lagga till: ");
-                scanf("%lf", &varde);
+                std::cin >> varde;
                 matlogg = lagg_till_matning(matlogg, &matlogg_antal, varde);
                 printf("Matloggen innehaller nu %d matning(ar).\n", matlogg_antal);
                 break;
@@ -226,9 +228,9 @@ int main(void) {
                 char namn[50];
                 double varde;
                 printf("Namn pa sensorn (utan mellanslag): ");
-                scanf("%49s", namn);
+                std::cin >> std::setw(50) >> namn;
                 printf("Matvarde: ");
-                scanf("%lf", &varde);
+                std::cin >> varde;
                 sensorregister = lagg_till_sensormatning(sensorregister,
                                                          &sensorregister_antal,
                                                          namn, varde);
@@ -250,7 +252,7 @@ int main(void) {
         {
             char namn[50];
             printf("Vilket namn vill du soka efter? ");
-            scanf("%49s", namn);
+            std::cin >> std::setw(50) >> namn;
             int index = hitta_sensor(sensorregister, sensorregister_antal, namn);
             if (index == -1)
             {
@@ -268,7 +270,7 @@ int main(void) {
         {
             char filnamn[100];
             printf("Filnamn att spara till: ");
-            scanf("%99s", filnamn);
+            std::cin >> std::setw(100) >> filnamn;
             spara_sensorregister(filnamn, sensorregister, sensorregister_antal);
             printf("Sensorregistret sparat till %s.\n", filnamn);
             break;
@@ -276,7 +278,7 @@ int main(void) {
         case 24: {
             char filnamn[100];
             printf("Filnamn att lasa fran: ");
-            scanf("%99s", filnamn);
+            std::cin >> std::setw(100) >> filnamn;
             free(sensorregister);
             sensorregister = lasa_sensorregister(filnamn, &sensorregister_antal);
             printf("Laste in %d post(er) fran %s.\n", sensorregister_antal, filnamn);
