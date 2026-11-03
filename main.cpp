@@ -72,8 +72,8 @@ int main(void)
         case 3:
         {
             int tal;
-            printf("Ange ett tal : ");
-            scanf("%d", &tal);
+            std::cout << "Ange ett tal: ";
+            std::cin >> tal;
             skriv_multiplikationstabell(tal);
             break;
         }
@@ -154,12 +154,12 @@ int main(void)
                 int tal[20];
                 int antal;
 
-            printf("Hur manga tabeller vill du skriva ut (max 20)? ");
-            scanf("%d", &antal);
+            std::cout << "Hur manga tabeller vill du skriva ut (max 20)? ";
+            std::cin >> antal;
             for (int i = 0; i < antal; i++)
             {
-                printf("Tal %d: ", i + 1);
-                scanf("%d", &tal[i]);
+                std::cout << "Tal " << (i + 1) << ": ";
+                std::cin >> tal[i];
             }
 
             skriv_flera_tabeller(tal, antal);
