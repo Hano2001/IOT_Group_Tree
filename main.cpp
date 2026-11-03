@@ -63,9 +63,9 @@ int main(void)
         case 2:
         {
             double bredd, hojd;
-            printf("Ange bredd och hojd : ");
-            scanf("%lf %lf", &bredd, &hojd);
-            printf("Arean ar %.2f\n", rektangelarea(bredd, hojd));
+            std::cout << "Ange bredd och hojd: ";
+            std::cin >> bredd >> hojd;
+            std::cout << "Arean ar " << rektangelarea(bredd, hojd) << "\n";
 
             break;
         }
@@ -131,31 +131,28 @@ int main(void)
             break;
         }
 
-        case 8:
-        {
-            double bredder[20], hojder[20];
-            int antal;
-            double storsta_area;
-            int index;
+            case 8: {
+                double bredder[20], hojder[20];
+                int antal;
+                double storsta_area;
+                int index;
 
-            printf("Hur manga rektanglar vill du jamfora (max 20)? ");
-            scanf("%d", &antal);
-            for (int i = 0; i < antal; i++)
-            {
-                printf("Rektangel %d, bredd och hojd: ", i + 1);
-                scanf("%lf %lf", &bredder[i], &hojder[i]);
-            }
+                std::cout << "Hur manga rektanglar vill du jamfora (max 20)? ";
+                std::cin >> antal;
+                for (int i = 0; i < antal; i++) {
+                    std::cout << "Rektangel " << (i + 1) << ", bredd och hojd: ";
+                    std::cin >> bredder[i] >> hojder[i];
+                    }
 
-            storst_rektangel(bredder, hojder, antal, &storsta_area, &index);
+                storst_rektangel(bredder, hojder, antal, storsta_area, index);
 
-            printf("Storst area ar %.2f, rektangel nummer %d\n",
-                   storsta_area, index + 1);
-            break;
-        }
-        case 9:
-        {
-            int tal[20];
-            int antal;
+                std::cout << "Storst area ar " << storsta_area
+                << ", rektangel nummer " << (index + 1) << "\n";
+                break;
+                }
+            case 9: {
+                int tal[20];
+                int antal;
 
             printf("Hur manga tabeller vill du skriva ut (max 20)? ");
             scanf("%d", &antal);
