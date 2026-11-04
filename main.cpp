@@ -6,9 +6,7 @@
 #include "Sensor-typen.h"
 
 static void skriv_meny(void) {
-=======
-static void skriv_meny(void)
-{
+    
 
     printf("\n == = Gruppens verktygslada == =\n");
     printf("1. Temperaturkonvertering(Celsius->Fahrenheit)\n");
@@ -401,20 +399,6 @@ int main(void)
                 sensorregister_antal = 0;
                 printf("Avslutar.\n");
                 break;
-
-
-        case 0:
-            if (matlogg != NULL)
-            {
-                frigor_matlogg(matlogg);
-                matlogg = NULL;
-                matlogg_antal = 0;
-            }
-            free(sensorregister);
-            sensorregister = NULL;
-            sensorregister_antal = 0;
-            printf("Avslutar.\n");
-            break;
 
 
         default:
