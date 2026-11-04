@@ -3,10 +3,13 @@
 #include "verktyg.h"
 #include <iostream>
 #include <iomanip>
-#include "Sensor-typen.h"
+#include "sensorobjekt_klass.h"
+
+
+
 
 static void skriv_meny(void) {
-    
+
 
     printf("\n == = Gruppens verktygslada == =\n");
     printf("1. Temperaturkonvertering(Celsius->Fahrenheit)\n");
