@@ -94,20 +94,16 @@ int main(void)
             skriv_multiplikationstabell(tal);
             break;
         }
-        case 4:
-        {
+        case 4:{
             int tal;
-            printf("Ange ett heltal : ");
-            scanf("%d", &tal);
-            if (ar_primtal(tal))
-            {
-                printf("%d ar ett primtal.\n", tal);
+            std::cout << "Ange ett heltal: ";
+            std::cin >> tal;
+            if (ar_primtal(tal)) {
+                std::cout << tal << " ar ett primtal.\n";
+            } else {
+                std::cout << tal << " ar inte ett primtal.\n";
             }
-            else
-            {
-                printf("%d ar inte ett primtal.\n", tal);
-            }
-            break;
+             break;
         }
         case 5:
         {
@@ -186,15 +182,14 @@ int main(void)
         {
             int tal[20];
             int antal;
-            printf("Hur manga tal vill du kontrollera (max 20)? ");
-            scanf("%d", &antal);
-            for (int i = 0; i < antal; i++)
-            {
-                printf("Tal %d: ", i + 1);
-                scanf("%d", &tal[i]);
+            
+            std::cout << "Hur manga tal vill du kontrollera (max 20)? ";
+            std::cin >> antal;
+            for (int i = 0; i < antal; i++) {
+                std::cout << "Tal " << (i + 1) << ": ";
+                std::cin >> tal[i];
             }
-
-            printf("Antal primtal: %d\n", raknar_primtal_i_array(tal, antal));
+            std::cout << "Antal primtal: " << raknar_primtal_i_array(tal, antal) << "\n";
             break;
         }
         case 11:

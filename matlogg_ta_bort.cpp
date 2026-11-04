@@ -16,11 +16,14 @@ double *ta_bort_senaste_matning(double *logg, int *antal)
     }
     (*antal)--;
 
-    if(antal == 0)
+    if(*antal == 0)
     {
         free(logg);
         return NULL;
     }
+    
+    logg = (double *)realloc(logg, (*antal - 1) * sizeof(double));
 
+    
     return logg;
 }
