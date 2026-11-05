@@ -15,6 +15,7 @@ struct Sensor {
      void bytNamn(const char *nyttNamn);
      void skrivUt() const;
      bool harHogreVarde(const Sensor &annan) const;
+     double hamtaSenasteVarde() const;
      };
 
 #endif

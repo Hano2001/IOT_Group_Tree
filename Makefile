@@ -6,10 +6,11 @@ KALLOR = main.cpp temperatur.cpp geometri.cpp multiplikation.cpp \
 		matlogg_lagg_till.cpp matlogg_ta_bort.cpp matlogg_skriv.cpp \
 		matlogg_statistik.cpp matlogg_kopiera.cpp matlogg_frigor.cpp \
 		sensor_lagg_till.cpp sensor_skriv.cpp sensor_medelvarde.cpp \
-		sensor_hitta.cpp sensor_spara.cpp sensor_lasa.cpp sensorobjekt_klass.cpp
+		sensor_hitta.cpp sensor_spara.cpp sensor_lasa.cpp \
 		sensorobjekt_klass.cpp sensorobjekt_uppdatera.cpp \
 		sensorobjekt_nollstall.cpp sensorobjekt_grans.cpp \
-		sensorobjekt_bytnamn.cpp sensorobjekt_skriv.cpp sensorobjekt_jamfor.cpp
+		sensorobjekt_bytnamn.cpp sensorobjekt_skriv.cpp sensorobjekt_jamfor.cpp \
+		sensorobjekt_hamtavarde.cpp
 
 OBJEKT = $(KALLOR:.cpp=.o)
 
@@ -19,7 +20,7 @@ verktygslada: $(OBJEKT)
 %.o: %.cpp verktyg.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-main.o sensorobjekt_klass.o: Sensor-typen.h
+main.o $(filter sensorobjekt_%.o,$(OBJEKT)): sensorobjekt_klass.h
 
 .PHONY: clean
 clean:
