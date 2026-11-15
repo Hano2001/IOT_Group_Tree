@@ -42,6 +42,9 @@ static void skriv_meny(void) {
     printf("28. Kontrollera om en sensor ar inom en grans\n");
     printf("29. Byt namn pa en sensor\n");
     printf("30. Jamfor tva sensorer\n");
+    printf("31. Hamta information om en sensor (getters)\n");
+    printf("32. Satt antal matningar direkt (testar validering)\n");
+    printf("33. Kontrollera om en sensor ar giltig\n");
 
     printf("0. Avsluta\n");
     printf("Val : ");
@@ -374,8 +377,11 @@ int main(void)
                 std::cin >> index;
                 std::cout << "Nytt namn (utan mellanslag): ";
                 std::cin >> std::setw(50) >> nyttNamn;
-                sensorer[index].bytNamn(nyttNamn);
-                sensorer[index].skrivUt();
+                if (sensorer[index].bytNamn(nyttNamn)) {
+                    sensorer[index].skrivUt();
+                } else {
+                    std::cout << "Ogiltigt namn -- namnet fick inte bytas.\n";
+                }
                 break;
             }
             case 30: {
@@ -391,6 +397,40 @@ int main(void)
             }
             break;
         }
+            case 31: {
+                int index;
+                std::cout << "Vilken sensor (0-2)? ";
+                std::cin >> index;
+                std::cout << "Namn: " << sensorer[index].hamtaNamn() << "\n";
+                std::cout << "Senaste varde: " << sensorer[index].hamtaSenasteVarde() << "\n";
+                std::cout << "Antal matningar: " << sensorer[index].hamtaAntalMatningar() << "\n";
+                break;
+            }
+            case 32: {
+                int index, nyttAntal;
+                std::cout << "Vilken sensor (0-2)? ";
+                std::cin >> index;
+                std::cout << "Nytt antal matningar: ";
+                std::cin >> nyttAntal;
+                if (sensorer[index].sattAntalMatningar(nyttAntal)) {
+                    std::cout << "Antal matningar uppdaterat.\n";
+                } else {
+                    std::cout << "Ogiltigt antal -- ett negativt antal accepteras inte.\n";
+                }
+                sensorer[index].skrivUt();
+                break;
+            }
+            case 33: {
+                int index;
+                std::cout << "Vilken sensor (0-2)? ";
+                std::cin >> index;
+                if (sensorer[index].arGiltig()) {
+                    std::cout << "Sensorn ar giltig.\n";
+                } else {
+                    std::cout << "Sensorn ar INTE giltig.\n";
+                }
+                break;
+            }
             case 0:
                 if (matlogg != NULL) {
                     frigor_matlogg(matlogg);
