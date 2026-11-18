@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
 
 int skriv_fizzbuzz(int fran, int till)
 {
@@ -8,20 +9,20 @@ int skriv_fizzbuzz(int fran, int till)
 
         if (i % 3 == 0 && i % 5 == 0)
         {
-            printf("FizzBuzz\n");
+            std::cout << "FizzBuzz \n";
         }
         else if (i % 3 == 0)
         {
-            printf("Fizz\n");
+            std::cout << "Fizz \n";
         }
         else if (i % 5 == 0)
         {
-            printf("Buzz\n");
+            std::cout << "Buzz \n";
         }
 
         else
         {
-            printf("%d\n", i);
+            std::cout << i << "\n";
         }
     }
     return 0;
@@ -50,6 +51,8 @@ void fizzbuzz_sammanfattning(int fran, int till, char *sammanfattning)
             antal_buzz++;
         }
     }
+
+    // std::cout << "Fizz: " << antal_fizz << "Buzz: " << antal_buzz << "FizzBuzz" << antal_fizzbuzz;
 
     sprintf(sammanfattning, "Fizz: %d, Buzz: %d, FizzBuzz: %d", antal_fizz, antal_buzz, antal_fizzbuzz);
 }
