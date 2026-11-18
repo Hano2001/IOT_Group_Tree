@@ -1,8 +1,9 @@
 #ifndef SENSOROBJEKT_KLASS_H
 #define SENSOROBJEKT_KLASS_H
 
-class Sensor {
-private:
+class Sensor
+{
+protected:
     char namn[50];
     double senasteVarde;
     int antalMatningar;
