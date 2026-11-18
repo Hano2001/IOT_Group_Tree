@@ -13,6 +13,9 @@ KALLOR = main.cpp temperatur.cpp geometri.cpp multiplikation.cpp \
 		sensorobjekt_hamtanamn.cpp sensorobjekt_hamtavarde.cpp \
 		sensorobjekt_hamtaantal.cpp sensorobjekt_sattantal.cpp \
 		sensorobjekt_giltig.cpp
+		temperatursensor_konstruktor.cpp temperatursensor_fahrenheit.cpp \
+ 		rorelsesensor_konstruktor.cpp rorelsesensor_larm.cpp \
+ 		fuktsensor_konstruktor.cpp fuktsensor_kritisk.cpp
 
 OBJEKT = $(KALLOR:.cpp=.o)
 
