@@ -14,6 +14,8 @@ public:
 
     const char *hamtaEnhet() const;
     double hamtaSomFahrenheit() const;
+    const char *hamtaTyp() const override;
+    void skrivUt() const override;
 };
 
 #endif
