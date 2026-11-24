@@ -63,10 +63,10 @@ int main(void)
     int matlogg_antal = 0;
     Sensormatning *sensorregister = NULL;
     int sensorregister_antal = 0;
-    Sensor sensorer[3] = {
-        Sensor("Temp-ute", 18.5),
-        Sensor("Temp-inne", 21.0),
-        Sensor("Luftfuktighet", 45.0)};
+    Sensor *sensorer[3];
+    sensorer[0] = new TemperatureSensor("Temp-ute", 18.5, "Celsius");
+    sensorer[1] = new TemperatureSensor("Temp-inne", 21.0, "Celsius");
+    sensorer[2] = new HumiditySensor("Luftfuktighet", 45.0, 70.0);
 
     TemperatureSensor temperatursensor("Temp-utomhus", 15.0, "Celsius");
     MotionSensor rorelsesensor("Rorelse-hall");
@@ -346,7 +346,7 @@ int main(void)
             for (int i = 0; i < 3; i++)
             {
                 std::cout << i << ": ";
-                sensorer[i].skrivUt();
+                sensorer[i]->skrivUt();
             }
             break;
         }
@@ -358,8 +358,8 @@ int main(void)
             std::cin >> index;
             std::cout << "Nytt varde: ";
             std::cin >> nyttVarde;
-            sensorer[index].uppdateraVarde(nyttVarde);
-            sensorer[index].skrivUt();
+            sensorer[index]->uppdateraVarde(nyttVarde);
+            sensorer[index]->skrivUt();
             break;
         }
         case 27:
@@ -367,8 +367,8 @@ int main(void)
             int index;
             std::cout << "Vilken sensor (0-2)? ";
             std::cin >> index;
-            sensorer[index].nollstallRakning();
-            sensorer[index].skrivUt();
+            sensorer[index]->nollstallRakning();
+            sensorer[index]->skrivUt();
             break;
         }
         case 28:
@@ -379,7 +379,7 @@ int main(void)
             std::cin >> index;
             std::cout << "Undre och ovre grans: ";
             std::cin >> min >> max;
-            if (sensorer[index].arInomGrans(min, max))
+            if (sensorer[index]->arInomGrans(min, max))
             {
                 std::cout << "Ja, senaste vardet ligger inom gransen.\n";
             }
@@ -397,9 +397,9 @@ int main(void)
             std::cin >> index;
             std::cout << "Nytt namn (utan mellanslag): ";
             std::cin >> std::setw(50) >> nyttNamn;
-            if (sensorer[index].bytNamn(nyttNamn))
+            if (sensorer[index]->bytNamn(nyttNamn))
             {
-                sensorer[index].skrivUt();
+                sensorer[index]->skrivUt();
             }
             else
             {
@@ -412,7 +412,7 @@ int main(void)
             int index1, index2;
             std::cout << "Jamfor sensor (0-2) och sensor (0-2): ";
             std::cin >> index1 >> index2;
-            if (sensorer[index1].harHogreVarde(sensorer[index2]))
+            if (sensorer[index1]->harHogreVarde(*sensorer[index2]))
             {
                 std::cout << "Sensor " << index1 << " har ett hogre varde an sensor "
                           << index2 << ".\n";
@@ -429,9 +429,10 @@ int main(void)
             int index;
             std::cout << "Vilken sensor (0-2)? ";
             std::cin >> index;
-            std::cout << "Namn: " << sensorer[index].hamtaNamn() << "\n";
-            std::cout << "Senaste varde: " << sensorer[index].hamtaSenasteVarde() << "\n";
-            std::cout << "Antal matningar: " << sensorer[index].hamtaAntalMatningar() << "\n";
+            std::cout << "Typ: " << sensorer[index]->hamtaTyp() << "\n";
+            std::cout << "Namn: " << sensorer[index]->hamtaNamn() << "\n";
+            std::cout << "Senaste varde: " << sensorer[index]->hamtaSenasteVarde() << "\n";
+            std::cout << "Antal matningar: " << sensorer[index]->hamtaAntalMatningar() << "\n";
             break;
         }
         case 32:
@@ -441,7 +442,7 @@ int main(void)
             std::cin >> index;
             std::cout << "Nytt antal matningar: ";
             std::cin >> nyttAntal;
-            if (sensorer[index].sattAntalMatningar(nyttAntal))
+            if (sensorer[index]->sattAntalMatningar(nyttAntal))
             {
                 std::cout << "Antal matningar uppdaterat.\n";
             }
@@ -449,7 +450,7 @@ int main(void)
             {
                 std::cout << "Ogiltigt antal -- ett negativt antal accepteras inte.\n";
             }
-            sensorer[index].skrivUt();
+            sensorer[index]->skrivUt();
             break;
         }
         case 33:
@@ -457,7 +458,7 @@ int main(void)
             int index;
             std::cout << "Vilken sensor (0-2)? ";
             std::cin >> index;
-            if (sensorer[index].arGiltig())
+            if (sensorer[index]->arGiltig())
             {
                 std::cout << "Sensorn ar giltig.\n";
             }
@@ -490,8 +491,7 @@ int main(void)
             std::cout << "Larmet utlost.\n";
             break;
         case 38:
-            std::cout << "Kritisk grans: " << fuktsensor.hamtaKritiskGrans() << "\
-n";
+            std::cout << "Kritisk grans: " << fuktsensor.hamtaKritiskGrans() << "\n";
             break;
         case 39:
             if (fuktsensor.arKritisktFuktigt())
@@ -514,6 +514,9 @@ n";
             free(sensorregister);
             sensorregister = NULL;
             sensorregister_antal = 0;
+            delete sensorer[0];
+            delete sensorer[1];
+            delete sensorer[2];
             printf("Avslutar.\n");
             break;
 
