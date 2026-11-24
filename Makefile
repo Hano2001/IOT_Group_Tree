@@ -25,7 +25,7 @@ verktygslada: $(OBJEKT)
 %.o: %.cpp verktyg.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-main.o sensorobjekt_klass.o: sensorobjekt_klass.h
+main.o $(filter sensorobjekt_%.o,$(OBJEKT)): sensorobjekt_klass.h
 
 .PHONY: clean
 clean:
