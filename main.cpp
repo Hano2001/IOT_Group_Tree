@@ -604,7 +604,21 @@ int main(void)
             std::sort(anteckningar.begin(), anteckningar.end());
             std::cout << "Anteckningarna ar nu sorterade i bokstavsordning.\n";
             break;
-
+        case 45:
+        {
+            if (anteckningar.empty())
+            {
+                std::cout << "Inga anteckningar att ta bort.\n";
+                break;
+            }
+            int index;
+            std::cout << "Vilket index vill du ta bort (0-"
+                      << (anteckningar.size() - 1) << ")? ";
+            std::cin >> index;
+            anteckningar.erase(anteckningar.begin() + index);
+            std::cout << "Borttagen. Antal kvar: " << anteckningar.size() << "\n";
+            break;
+        }
         case 47: {
             std::string typ;
             std::cout << "Vilken typ (t.ex. \"Temperatursensor\")? ";
