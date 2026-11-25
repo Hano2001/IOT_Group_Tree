@@ -503,6 +503,17 @@ int main(void)
                 std::cout << "Fuktnivan ar under den kritiska gransen.\n";
             }
             break;
+        case 46:{
+            std::cout << "Antal anteckningar just nu: " << anteckningar.size() << "\n";
+            std::cout << "Rensa alla (1 = ja, 0 = nej)? ";
+            int svar;
+            std::cin >> svar;
+            if (svar == 1) {
+                anteckningar.clear();
+                std::cout << "Alla anteckningar rensade. \n";
+            }
+            break;
+        }
 
         case 0:
             if (matlogg != NULL)
