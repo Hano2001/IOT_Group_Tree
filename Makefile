@@ -19,7 +19,8 @@ KALLOR = main.cpp temperatur.cpp geometri.cpp multiplikation.cpp \
 		fuktsensor_typ.cpp fuktsensor_skrivut.cpp \
 		sensorstatistik.cpp \
 		tester_hjalp.cpp tester_primtal.cpp \
-		tester_fukt.cpp 
+		tester_fukt.cpp \
+		tester_sensor_grund.cpp tester_sensor_validering.cpp
 
 OBJEKT = $(KALLOR:.cpp=.o)
 
