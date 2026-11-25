@@ -532,22 +532,6 @@ int main(void)
                 std::cin >> typ;
                 std::cout << "Namn (utan mellanslag): ";
                 std::cin >> namn;
-          }
-            break;
-
-        case 46:{
-            std::cout << "Antal anteckningar just nu: " << anteckningar.size() << "\n";
-            std::cout << "Rensa alla (1 = ja, 0 = nej)? ";
-            int svar;
-            std::cin >> svar;
-            if (svar == 1) {
-                anteckningar.clear();
-                std::cout << "Alla anteckningar rensade. \n";
-            }
-            break;
-        }
-
-            
 
                 if (typ == 1) {
                     std::cout << "Startvarde: ";
@@ -578,6 +562,18 @@ int main(void)
             }
         }
         break;
+        
+        case 46:{
+            std::cout << "Antal anteckningar just nu: " << anteckningar.size() << "\n";
+            std::cout << "Rensa alla (1 = ja, 0 = nej)? ";
+            int svar;
+            std::cin >> svar;
+            if (svar == 1) {
+                anteckningar.clear();
+                std::cout << "Alla anteckningar rensade. \n";
+            }
+            break;
+        }
 
 
         case 0:
