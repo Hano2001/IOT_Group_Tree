@@ -10,6 +10,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cassert>
+#include "sensorstatistik.h"
+#include "tester.h"
 
 static void skriv_meny(void)
 {
@@ -61,6 +64,8 @@ static void skriv_meny(void)
     printf("44. Sortera anteckningarna\n");
     printf("45. Ta bort en anteckning\n");
     printf("46. Rensa alla anteckningar\n");
+    printf("47. Berakna medelvarde for en sensortyp\n");
+    printf("48. Kor alla tester\n");
 
 
     printf("0. Avsluta\n");
@@ -374,6 +379,7 @@ int main(void)
             double nyttVarde;
             std::cout << "Vilken sensor (0-" << (sensorer.size() - 1) << ")? ";
             std::cin >> index;
+            assert(index >= 0 && index < (int)sensorer.size());
             std::cout << "Nytt varde: ";
             std::cin >> nyttVarde;
             sensorer[index]->uppdateraVarde(nyttVarde);
@@ -446,7 +452,7 @@ int main(void)
         case 31:
         {
             int index;
-            std::cout << "Vilken sensor (0-2)? ";
+            std::cout << "Vilken sensor (0-" << (sensorer.size() - 1) << ")? ";
             std::cin >> index;
             std::cout << "Typ: " << sensorer[index]->hamtaTyp() << "\n";
             std::cout << "Namn: " << sensorer[index]->hamtaNamn() << "\n";
@@ -457,7 +463,7 @@ int main(void)
         case 32:
         {
             int index, nyttAntal;
-            std::cout << "Vilken sensor (0-2)? ";
+            std::cout << "Vilken sensor (0-" << (sensorer.size() - 1) << ")? ";
             std::cin >> index;
             std::cout << "Nytt antal matningar: ";
             std::cin >> nyttAntal;
@@ -475,7 +481,7 @@ int main(void)
         case 33:
         {
             int index;
-            std::cout << "Vilken sensor (0-2)? ";
+            std::cout << "Vilken sensor (0-" << (sensorer.size() - 1) << ")? ";
             std::cin >> index;
             if (sensorer[index]->arGiltig())
             {
@@ -575,18 +581,63 @@ int main(void)
             break;
         }
 
+        case 43: {
+            std::cin.ignore();
+            std::string sokord;
+            std::cout << "Sok efter ordet: ";
+            std::getline(std::cin, sokord);
+
+            bool hittad = false;
+            for (size_t i = 0; i < anteckningar.size(); i++) {
+                if (anteckningar[i].find(sokord) != std::string::npos) {
+                    std::cout << i << ": " << anteckningar[i] << "\n";
+                    hittad = true;
+                }
+            }
+            if (!hittad) {
+                std::cout << "Hittade ingen anteckning med ordet \"" << sokord << "\".\n";
+            }
+            break;
+        }
+
+        case 44:
+            std::sort(anteckningar.begin(), anteckningar.end());
+            std::cout << "Anteckningarna ar nu sorterade i bokstavsordning.\n";
+            break;
+
+        case 47: {
+            std::string typ;
+            std::cout << "Vilken typ (t.ex. \"Temperatursensor\")? ";
+            std::cin.ignore();
+            std::getline(std::cin, typ);
+            std::cout << "Medelvarde: " << hamtaMedelvardeForTyp(sensorer, typ) << "\n";
+            break;
+        }
+
+        case 48:
+            testerKorda = 0;
+            testerLyckade = 0;
+            std::cout << "=== Kor alla tester ===\n";
+            testaSensorGrundlaggande();
+            testaSensorValidering();
+            testaTemperatursensor();
+            testaFuktsensor();
+            testaPrimtal();
+            testaKalkylator();
+            std::cout << "=== " << testerLyckade << "/" << testerKorda
+                      << " tester lyckades ===\n";
+            break;
 
         case 0:
 
             free(sensorregister);
             sensorregister = NULL;
             sensorregister_antal = 0;
-            delete sensorer[0];
-            delete sensorer[1];
-            delete sensorer[2];
             for (Sensor *s : sensorer) {
                 delete s;
             }
+            sensorer.clear();
+            printf("Avslutar.\n");
         break;
 
         default:
