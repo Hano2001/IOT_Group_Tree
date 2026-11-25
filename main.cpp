@@ -587,6 +587,7 @@ int main(void)
             for (Sensor *s : sensorer) {
                 delete s;
             }
+        break;
 
         default:
             printf("Ogiltigt val, forsok igen.\n");
