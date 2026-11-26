@@ -67,7 +67,6 @@ static void skriv_meny(void)
     printf("47. Berakna medelvarde for en sensortyp\n");
     printf("48. Kor alla tester\n");
 
-
     printf("0. Avsluta\n");
     printf("Val : ");
 }
@@ -79,7 +78,7 @@ int main(void)
     std::vector<std::string> anteckningar;
     Sensormatning *sensorregister = NULL;
     int sensorregister_antal = 0;
-    std::vector<Sensor*> sensorer;
+    std::vector<Sensor *> sensorer;
     sensorer.push_back(new TemperatureSensor("Temp-ute", 18.5, "Celsius"));
     sensorer.push_back(new TemperatureSensor("Temp-inne", 21.0, "Celsius"));
     sensorer.push_back(new HumiditySensor("Luftfuktighet", 45.0, 70.0));
@@ -251,7 +250,8 @@ int main(void)
             std::cout << "Efter : a = " << a << ", b = " << b << "\n";
             break;
         }
-        case 13: {
+        case 13:
+        {
             double varde;
             printf("Ange matvarde att lagga till: ");
             std::cin >> varde;
@@ -260,39 +260,50 @@ int main(void)
             break;
         }
         case 14:
-         if (!matlogg.empty()) {
-             matlogg.pop_back();
-        }
-        printf("Matloggen innehaller nu %d matning(ar).\n", (int)matlogg.size());
-        break;
+            if (!matlogg.empty())
+            {
+                matlogg.pop_back();
+            }
+            printf("Matloggen innehaller nu %d matning(ar).\n", (int)matlogg.size());
+            break;
         case 15:
-        if (matlogg.empty()) {
-            printf("Matloggen ar tom.\n");
-        } else {
-            for (double varde : matlogg) {
-            printf("%.2f\n", varde);
-        }
-    }
-        break;
+            if (matlogg.empty())
+            {
+                printf("Matloggen ar tom.\n");
+            }
+            else
+            {
+                for (double varde : matlogg)
+                {
+                    printf("%.2f\n", varde);
+                }
+            }
+            break;
 
         case 16:
-        if (matlogg.empty()) {
-            printf("Matloggen ar tom.\n");
-        } else {
-            auto minIt = std::min_element(matlogg.begin(), matlogg.end());
-            auto maxIt = std::max_element(matlogg.begin(), matlogg.end());
-            double summa = 0;
-            for (double varde : matlogg) {
-            summa += varde;
-        }
-        printf("Min: %.2f, Max: %.2f, Medel: %.2f\n",
-            *minIt, *maxIt, summa / matlogg.size());
-    }
-    break;
-        case 17: {
+            if (matlogg.empty())
+            {
+                printf("Matloggen ar tom.\n");
+            }
+            else
+            {
+                auto minIt = std::min_element(matlogg.begin(), matlogg.end());
+                auto maxIt = std::max_element(matlogg.begin(), matlogg.end());
+                double summa = 0;
+                for (double varde : matlogg)
+                {
+                    summa += varde;
+                }
+                printf("Min: %.2f, Max: %.2f, Medel: %.2f\n",
+                       *minIt, *maxIt, summa / matlogg.size());
+            }
+            break;
+        case 17:
+        {
             std::vector<double> kopia = matlogg;
             printf("Kopierade %d matning(ar) till en ny logg:\n", (int)kopia.size());
-            for (double varde : kopia) {
+            for (double varde : kopia)
+            {
                 printf("%.2f\n", varde);
             }
             printf("(Kopian stadas bort automatiskt nar case-blocket avslutas.)\n");
@@ -367,11 +378,12 @@ int main(void)
         }
 
         case 25:
-        for (size_t i = 0; i < sensorer.size(); i++) {
-            std::cout << i << ": ";
-            sensorer[i]->skrivUt();
-        }
-        break;
+            for (size_t i = 0; i < sensorer.size(); i++)
+            {
+                std::cout << i << ": ";
+                sensorer[i]->skrivUt();
+            }
+            break;
 
         case 26:
         {
@@ -528,73 +540,102 @@ int main(void)
                 std::cout << "Fuktnivan ar under den kritiska gransen.\n";
             }
             break;
-        
-          case 40: {
-                int typ;
-                std::string namn;
-                double startvarde;
-                
-                std::cout << "Vilken typ (1=Temperatur, 2=Rorelse, 3=Fukt)? ";
-                std::cin >> typ;
-                std::cout << "Namn (utan mellanslag): ";
-                std::cin >> namn;
 
-                if (typ == 1) {
-                    std::cout << "Startvarde: ";
-                    std::cin >> startvarde;
-                    sensorer.push_back(new TemperatureSensor(namn.c_str(), startvarde, " Celsius"));
-                } else if (typ == 2) {
-                    sensorer.push_back(new MotionSensor(namn.c_str()));
-                } else if (typ == 3) {
-                    double kritisk;
-                    std::cout << "Startvarde och kritisk grans: ";
-                    std::cin >> startvarde >> kritisk;
-                    sensorer.push_back(new HumiditySensor(namn.c_str(), startvarde, kritisk));
-                    } else {
-                        std::cout << "Okand typ.\n";
-                        break;
-                    }
+        case 40:
+        {
+            int typ;
+            std::string namn;
+            double startvarde;
 
-                std::cout << "Sensor tillagd. Antal sensorer nu: " << sensorer.size() << "\n";
+            std::cout << "Vilken typ (1=Temperatur, 2=Rorelse, 3=Fukt)? ";
+            std::cin >> typ;
+            std::cout << "Namn (utan mellanslag): ";
+            std::cin >> namn;
+
+            if (typ == 1)
+            {
+                std::cout << "Startvarde: ";
+                std::cin >> startvarde;
+                sensorer.push_back(new TemperatureSensor(namn.c_str(), startvarde, " Celsius"));
+            }
+            else if (typ == 2)
+            {
+                sensorer.push_back(new MotionSensor(namn.c_str()));
+            }
+            else if (typ == 3)
+            {
+                double kritisk;
+                std::cout << "Startvarde och kritisk grans: ";
+                std::cin >> startvarde >> kritisk;
+                sensorer.push_back(new HumiditySensor(namn.c_str(), startvarde, kritisk));
+            }
+            else
+            {
+                std::cout << "Okand typ.\n";
                 break;
             }
 
-        case 42:
-        if (anteckningar.empty()) {
-            std::cout << "Inga anteckningar an.\n";
-        } else {
-            for (size_t i = 0; i < anteckningar.size(); i++) {
-                std::cout << i << ": " << anteckningar[i] << "\n";
-            }
+            std::cout << "Sensor tillagd. Antal sensorer nu: " << sensorer.size() << "\n";
+            break;
         }
-        break;
-        
-        case 46:{
+
+        case 41:
+        {
+            std::cin.ignore();
+            std::string anteckning;
+            std::cout << "Skriv din anteckning: ";
+            std::getline(std::cin, anteckning);
+            anteckningar.push_back(anteckning);
+            std::cout << "Anteckning tillagd. Antal: " << anteckningar.size() << "\n";
+            break;
+        }
+
+        case 42:
+            if (anteckningar.empty())
+            {
+                std::cout << "Inga anteckningar an.\n";
+            }
+            else
+            {
+                for (size_t i = 0; i < anteckningar.size(); i++)
+                {
+                    std::cout << i << ": " << anteckningar[i] << "\n";
+                }
+            }
+            break;
+
+        case 46:
+        {
             std::cout << "Antal anteckningar just nu: " << anteckningar.size() << "\n";
             std::cout << "Rensa alla (1 = ja, 0 = nej)? ";
             int svar;
             std::cin >> svar;
-            if (svar == 1) {
+            if (svar == 1)
+            {
                 anteckningar.clear();
                 std::cout << "Alla anteckningar rensade. \n";
             }
             break;
         }
 
-        case 43: {
+        case 43:
+        {
             std::cin.ignore();
             std::string sokord;
             std::cout << "Sok efter ordet: ";
             std::getline(std::cin, sokord);
 
             bool hittad = false;
-            for (size_t i = 0; i < anteckningar.size(); i++) {
-                if (anteckningar[i].find(sokord) != std::string::npos) {
+            for (size_t i = 0; i < anteckningar.size(); i++)
+            {
+                if (anteckningar[i].find(sokord) != std::string::npos)
+                {
                     std::cout << i << ": " << anteckningar[i] << "\n";
                     hittad = true;
                 }
             }
-            if (!hittad) {
+            if (!hittad)
+            {
                 std::cout << "Hittade ingen anteckning med ordet \"" << sokord << "\".\n";
             }
             break;
@@ -619,7 +660,8 @@ int main(void)
             std::cout << "Borttagen. Antal kvar: " << anteckningar.size() << "\n";
             break;
         }
-        case 47: {
+        case 47:
+        {
             std::string typ;
             std::cout << "Vilken typ (t.ex. \"Temperatursensor\")? ";
             std::cin.ignore();
@@ -647,12 +689,13 @@ int main(void)
             free(sensorregister);
             sensorregister = NULL;
             sensorregister_antal = 0;
-            for (Sensor *s : sensorer) {
+            for (Sensor *s : sensorer)
+            {
                 delete s;
             }
             sensorer.clear();
             printf("Avslutar.\n");
-        break;
+            break;
 
         default:
             printf("Ogiltigt val, forsok igen.\n");
