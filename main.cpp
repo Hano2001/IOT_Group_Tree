@@ -556,7 +556,7 @@ int main(void)
             {
                 std::cout << "Startvarde: ";
                 std::cin >> startvarde;
-                sensorer.push_back(new TemperatureSensor(namn.c_str(), startvarde, " Celsius"));
+                sensorer.push_back(new TemperatureSensor(namn.c_str(), startvarde, "Celsius"));
             }
             else if (typ == 2)
             {
