@@ -1,7 +1,7 @@
 #include <math.h>
 #include "verktyg.h"
 
-/* Returns NAN for division by zero or an unsupported operator. */
+/* Returns 0 for division by zero and NAN for an unsupported operator. */
 double berakna(double a, double b, char operatortecken)
 {
     switch (operatortecken)
@@ -15,7 +15,7 @@ double berakna(double a, double b, char operatortecken)
     case '/':
         if (b == 0.0)
         {
-            return NAN;
+            return 0.0;
         }
         return a / b;
     default:

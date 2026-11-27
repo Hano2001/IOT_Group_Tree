@@ -1,10 +1,8 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Wpedantic -std=c++20
+CXXFLAGS = -Wall -Wextra -Wpedantic -std=c++20 -g
 
 KALLOR = main.cpp temperatur.cpp geometri.cpp multiplikation.cpp \
 		primtal.cpp fizzbuzz.cpp kalkylator.cpp \
-		matlogg_lagg_till.cpp matlogg_ta_bort.cpp matlogg_skriv.cpp \
-		matlogg_statistik.cpp matlogg_kopiera.cpp matlogg_frigor.cpp \
 		sensor_lagg_till.cpp sensor_skriv.cpp sensor_medelvarde.cpp \
 		sensor_hitta.cpp sensor_spara.cpp sensor_lasa.cpp \
 		sensorobjekt_klass.cpp sensorobjekt_uppdatera.cpp \
@@ -12,10 +10,18 @@ KALLOR = main.cpp temperatur.cpp geometri.cpp multiplikation.cpp \
 		sensorobjekt_bytnamn.cpp sensorobjekt_skriv.cpp sensorobjekt_jamfor.cpp \
 		sensorobjekt_hamtanamn.cpp sensorobjekt_hamtavarde.cpp \
 		sensorobjekt_hamtaantal.cpp sensorobjekt_sattantal.cpp \
-		sensorobjekt_giltig.cpp
+		sensorobjekt_giltig.cpp \
 		temperatursensor_konstruktor.cpp temperatursensor_fahrenheit.cpp \
- 		rorelsesensor_konstruktor.cpp rorelsesensor_larm.cpp \
- 		fuktsensor_konstruktor.cpp fuktsensor_kritisk.cpp
+		rorelsesensor_konstruktor.cpp rorelsesensor_larm.cpp \
+		fuktsensor_konstruktor.cpp fuktsensor_kritisk.cpp \
+		temperatursensor_typ.cpp temperatursensor_skrivut.cpp \
+		rorelsesensor_typ.cpp rorelsesensor_skrivut.cpp \
+		fuktsensor_typ.cpp fuktsensor_skrivut.cpp \
+		sensorstatistik.cpp \
+		tester_hjalp.cpp tester_primtal.cpp tester_kalkylator.cpp \
+		tester_fukt.cpp \
+		tester_sensor_grund.cpp tester_sensor_validering.cpp \
+		tester_temperatur.cpp
 
 OBJEKT = $(KALLOR:.cpp=.o)
 
@@ -25,7 +31,7 @@ verktygslada: $(OBJEKT)
 %.o: %.cpp verktyg.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-main.o sensorobjekt_klass.o: sensorobjekt_klass.h
+main.o $(filter sensorobjekt_%.o,$(OBJEKT)): sensorobjekt_klass.h
 
 .PHONY: clean
 clean:
